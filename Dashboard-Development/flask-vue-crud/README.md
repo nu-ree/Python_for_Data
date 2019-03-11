@@ -59,7 +59,25 @@ $ vue init webpack client
 6. Setup e2e tests with Nightwatch: `No`
 7. Should we run npm install for you after the project has been created: `Yes, use NPM`
 
-![1552322503850](C:\Users\nrchu\AppData\Roaming\Typora\typora-user-images\1552322503850.png)
 
 
+## Step 3. HTML 파일
 
+8) 원본 블로그에 있는 html 소스를 index.html 파일로 만들어  \flask-vue-crud\client\src 아래에 저장한다. 
+
+9) 폴더는 아래와 같이 생겼다. 
+
+```
+├── App.vue # root component. 
+├── assets # static assets(이미지, 폰트 등 있는 곳)
+│   └── logo.png
+├── components # UI component가 있는 곳
+│   └── HelloWorld.vue
+├── main.js #앱의 첫 화면. root component에서 Vue를 가져와서 시작함
+└── router #URLS를 정하고 components와 연결
+    └── index.js
+```
+
+App.vue 수정하다가 중단
+
+내일하자~
