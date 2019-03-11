@@ -1,10 +1,3 @@
-# $ mkdir flask-vue-crud
-# $ cd flask-vue-crud
-# $ python3 -m venv tutorial-env 
-# $ tutorial-env\Scripts\activate.bat #for Window -- https://docs.python.org/ko/3/tutorial/venv.html
-# $ source tutorial-env/bin/activate # for Ubuntu
-# pip install Flask==1.0.2 Flask-Cors==3.0.4
-
 from flask import Flask, jsonify
 from flask_cors import CORS
 
@@ -19,7 +12,7 @@ app.config.from_object(__name__)
 CORS(app)
 
 
-# sanity check route
+# sanity check route -- localhost:5000/ping 의 반환 화면
 @app.route('/ping', methods=['GET'])
 def ping_pong():
     return jsonify('pong!')
@@ -27,3 +20,6 @@ def ping_pong():
 
 if __name__ == '__main__':
     app.run()
+
+
+
