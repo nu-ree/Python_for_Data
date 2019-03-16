@@ -1,0 +1,35 @@
+Apache Spark
+- unified computing engine
+- set of libraries for parallel data processing on computer clusters
+
+
+# Unified
+1) 새로운 라이브러리 / 기존 라이브러리을 잘 조합해줌
+2) 구조화된 API (DF, Dsets SQL)
+
+# Computing Engine
+- 클라우드 저장 시스템,분산파일시스템,메시지 버스 등과 잘 연동.
+- 데이터가 어디 있건 여러 저장소에 있는 데이터를 메모리에 올려서 돌아가게 할 수 있음
+- 하둡은 저장 시스템 + 분산처리시스템을 조합했지만 
+- 스파크는 저장 시스템과 분산처리시스템을 분리함. 
+
+# Libraries
+
+
+
+# History of Spark
+- 맵리듀스 엔진은 large application을 만드는 것이 어렵고 비효율적임. 가령 모델을 병렬처리할 때 데이터를 밑에서부터 끌고 올라와야 함
+- 반면 스파크는 데이터를 손에 들고 있어서 
+- SQL로도 쿼리 가능
+- Over time, the project added a plethora of new APIs that build on this more powerful structured foundation, including DataFrames, machine learning pipelines, and Structured Streaming, a high-level, automatically optimized streaming API. 
+
+
+------------------
+
+CH2. A gentle introduction to Spark
+# DataFrames
+- whereas a Spark DataFrame can span thousands of computers. The reason for putting
+the data on more than one computer should be intuitive: either the data is too large to fit on one
+machine or it would simply take too long to perform that computation on one machine.
+- 여러 서버에 파티션 되어서 들어가 있는것 
+- 
