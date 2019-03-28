@@ -109,3 +109,34 @@ main()
 
 ### 1-4. Variable Statements and Operators
 
+***Data Types***
+
+- Numeric Data Type : integer, float, long integer, octal integer, ...
+- String Data Type 
+- Collection Type : tuple, list, set, ...
+
+***Operators*** : +, - , *, /, %, ==, != 
+
+***변수형태 변환(type casting)*** : `int("1")` , `str(100)`
+
+***Swaping statement***: `num1, num2 = num2, num1`
+
+
+
+
+
+### 1-5. String
+
+- 따옴표로 만들어줌. 예: `test_word = "hello world"`
+
+- 개별 문자는 index 를 가지고 있음. indexing 가능
+
+  ```python
+  test_world[0]
+  >>> "h"
+  ```
+
+- 덧셈 = 스트링 연결 
+- 곱셈 = 횟수만큼 반복
+- 
+
