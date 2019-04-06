@@ -26,7 +26,7 @@
 >
 > 1-10. Class and Instance
 >
-> 1-10. Module and Import
+> 1-11. Module and Import
 
 
 
@@ -39,7 +39,7 @@
 - 집을 지으려면(프로그래밍을 하려면) 설계도를 그려야 함(UML)
 
 - 설계도를 그리려면 데이터의 구조와 알고리즘을 알고 있어야함
-- ***엔지니어로서구조를 어떻게 잘 설계할 수 있을까?*** 고민해야 함!
+- ***엔지니어로서 구조를 어떻게 잘 설계할 수 있을까?*** 고민해야 함!
 - 이 강의에서 쓰는 언어는 Python!
 
 
@@ -51,7 +51,7 @@
 - Dynamic typing 지원. (보통 compiler 언어는 지원 x)
 - industry와 academia에서 모두 많이 쓰이고 있음
 - 코드 규칙이 잘 짜여있음!
-- 분석에 특화되어있음!
+- 데이터 분석에 특화되어있음!
 
 
 
@@ -60,6 +60,8 @@
 ### 1-2. Hello World in Python
 
 - `print Hello world`를 해보자
+
+  
 
 ***Style 1: Procedure-oriented programming***
 
@@ -124,7 +126,7 @@ main()
 
 **Indentation**
 
-- 4칸 띄기
+- 4칸 띄기 --> 추천
 - tab 쓰기
 
 
@@ -185,8 +187,16 @@ main()
   - [1:9:2] --> 1,3,5,7번째를 가져옴
   - range(x,y,z)로도 표현 가능
 - `[::z]` 처음부터 끝까지 z씩 건너서
-- `[5::-1]` 5부터  반대로 처음까지 1개씩 건너서 --> 5,4,3,2,1 순으로 출력(negative steps)
-- list 와 string 모두 이 방식으로 잘라옴
+
+```python
+sample =['가', '나', '다', '라', '마']
+print(sample[4::-1])
+>> 마부터 반대로 끝까지
+print(sample[5::-1])
+>> 마부터 반대로 끝까지(마지막 인덱스를 초과하면 마지막자리부터 시작)
+```
+
+- ` 5부터  반대로 처음까지 1개씩 건너서 -->  순으로 출력/(negative stelist 와 string 모두 이 방식으로 잘라옴
 
 
 
@@ -272,10 +282,10 @@ dicTest.items() # 각각의 key와 values 를 튜플로 묶어 리스트로 출�
 ```python
 for variable in seuqence: 
     print('statements for loop')
-    if vraible == something:
+    if variable == something:
         continue # 같은 레벨의 for loop으로 다시 올라가라. 
     else:
-        print(vratible)
+        print(variable)
     #이 if - else구분에서는 something에 해당하는 variable을 제외한 나머지를 출력
 else: # for loop의 else
     print('when for-loop is finished without a break!')
@@ -330,6 +340,7 @@ def isPrimeNumber(numParam1):
         else: 
             return True
         return False
+    
 def findPrimes(numParam1, numParam2):
     numCount = 1
     for itr in range(numParam1, numParam2):
@@ -588,4 +599,6 @@ from src.edu.lecture.DSA import *
 import Home
 
 ```
+
+-- 끝
 
