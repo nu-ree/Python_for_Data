@@ -1,21 +1,34 @@
 # Week 1 Python Overview
 
 - KAIST 문일철교수님의 [[데이터 구조 및 분석] 강의](https://www.edwith.org/datastructure-2017f/joinLectures/11178)를 듣고 필기한 노트입니다. 
-- 
+
+
 
 #### 1주차 강의 구성
 
 > 1-1. Programming and Execution Environment
+>
 > 1-2. Hello World in Python
+>
 > 1-3. Naming, Styling and Comments
+>
 > 1-4. Variable Statements and Operators
+>
 > 1-5. String
+>
 > 1-6. List, Tuple, Dictionary
+>
 > 1-7. Condition and Loop Statement
+>
 > 1-8. Function Statement
+>
 > 1-9. Assignment and Equivalence
+>
 > 1-10. Class and Instance
+>
 > 1-10. Module and Import
+
+
 
 --------------------
 
