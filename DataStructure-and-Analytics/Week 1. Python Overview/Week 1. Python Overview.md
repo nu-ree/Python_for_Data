@@ -1,8 +1,21 @@
 # Week 1 Python Overview
 
-- KAIST 문일철교수님의 [데이터 구조 및 분석] 강의를 듣고 필기한 노트입니다. 
+- KAIST 문일철교수님의 [[데이터 구조 및 분석] 강의](https://www.edwith.org/datastructure-2017f/joinLectures/11178)를 듣고 필기한 노트입니다. 
+- 
 
+#### 1주차 강의 구성
 
+> 1-1. Programming and Execution Environment
+> 1-2. Hello World in Python
+> 1-3. Naming, Styling and Comments
+> 1-4. Variable Statements and Operators
+> 1-5. String
+> 1-6. List, Tuple, Dictionary
+> 1-7. Condition and Loop Statement
+> 1-8. Function Statement
+> 1-9. Assignment and Equivalence
+> 1-10. Class and Instance
+> 1-10. Module and Import
 
 --------------------
 
@@ -467,7 +480,7 @@ del homeAtDaejeon
 
 ---------------
 
-### 1-10. Module and Import
+### 1-11. Module and Import
 
 #### (1) Module
 
@@ -544,11 +557,22 @@ homeAtSuwon.printStatus()
 
 - src >> edu >> lecture >> DSA >> `Home.py` :
   - DSA 아래에 클래스를 저장한 파이썬 파일
+- 모듈이 많이 모여있는 꾸러미, 디렉토리를 ***package***라고 부름!
 
 ```python
-from src.edu.lecture.DSA import Home
-from package import module
 # from 뒤에 디렉토리를 지정
 # import에 불러올 .py 파일명 지정
+from package import module
+
+# 예를 들어
+from src.edu.lecture.DSA import Home
+
+# 디렉토리 안에 있는 모든 모듈을 가져오고 싶다면? import * 이용
+from src.edu.lecture.DSA import * 
+
+
+# 같은 디렉토리 안에 있는 모듈을 가져올 때는 from을 생략 가능!
+import Home
+
 ```
 
