@@ -66,3 +66,6 @@
 ### (2)  UML notation : Calss and Instance
 
 - 하나의 클래스는 member variable 과 member functions 으로 구성된다. 
+
+
+
