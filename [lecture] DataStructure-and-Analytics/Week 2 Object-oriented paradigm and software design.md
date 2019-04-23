@@ -60,12 +60,84 @@
 ### (1) Software Design as House Floorplan
 
 - 소프트웨어를 설계하고 개발하려면 설계도를 읽을 줄 알아야 함
-- 소프트웨어를 설계하는 표준을 배워야 함 --> **Unified Modeling Language(UML)**을 배워보자
-- 다양한 UML이 존재하지만 Class를 활요하는 UML을 알아보자
+- 소프트웨어를 설계하는 표준을 배워야 함
+  - OMG그룹에서 만든 **Unified Modeling Language(UML)**을 배워보자
+- 다양한 UML이 존재하지만 Class를 활용하는 UML을 알아보자
 
 ### (2)  UML notation : Calss and Instance
 
-- 하나의 클래스는 member variable 과 member functions 으로 구성된다. 
+- 클래스를 다루는 설계도는 이렇게 설계한다. 
+- 기본적인 클래스의 얼계를 짜놓은 형태. 
+- Class & Instance의 종류:
+  - Abstract class: e.g.`Person`
+  - Class: e.g. `Customer` 
+  - Named instance: e.g. `Park::Customer`
+  - Unnamed instance: e.g. `Customer`
+- 하나의 클래스는 attribute(=member variable, property)과 member functions(=methods) 으로 구성
+- Instance name:
+  - `(InstanceName)`::`(ClassName)`
+  - e.g. `Park::Customer` <이렇게 쓰면 이게Named Instance가 되는 것
+- Visibility options : 
+  - `+` : public
+  - `#` : protected
+  - `-`: private **현실에서 선호되는 방식**. *"내 클래스는 내가 책임질게. 다른 데이터들은 method를 이용해서 접근해 "* 안전하게 데이터를 관리하는 방식. 
+-  Member variables
+  - `+#-` `(name)`:`(type)`=`(default value)`
+  - e.g. `-ID:String` , `#AccountNum:Integer`, `+Name:String=Hey`('Hey'를 디폴트 값으로 넣어두고 나중에 method를 통해서 바꿔줄 수 있다는 의미)
+- Member methods:
+  - `+#-` `(name)` `(arguments)`:`(type)`
+  - e.g. `+login():void`, `+requestWithdrawal(arg):Boolean`
 
 
+
+### 2-3. Encapsulation and Inheritance
+
+#### (1) Encapsulation
+
+> Encapsulation이란? *클래스 내부에 모든 내용이 싸여있고, 외부에선 methods로 접근하게 한다는 개념이다*
+
+- Object는 Data와 Behavior로 구성되어 있음
+  - *Behavior라는 function을 통해서만 데이터에 접근해야 해! 데이터 변형은 내 behavior로만 하겠어. 캡슐로 만들어서 그 안에 있는 건 내가 다 컨트롤 할거야.*
+- visibility option을 통해서 통제함 
+  - `private - protected - public`
+  - Method는 public으로. data는 private로 해서 method를 이용해서 관리
+- **파이썬은 vitibility option을 제공하지 않음!!!** (그렇군..!!) 즉, 파이썬에서 모든 attribute는 외부에서 accessible함. 하지만, 몇 가지 약속이 있음. `__var1`이렇게 쓰는건, 외부에서 접근하지 않았으면 좋겠다는 표현! 파이썬에선 이런 변수나 함수명의 표현으로 visibility option의 의미를 전달함. 반면 C나 자바에서는 `private - protected - public` 등을 통해 visibility를 조정할 수 있음. 
+
+#### (2) Inheritance
+
+- 유전, 유산? 클래스끼리 무슨 유산? 
+
+> Inheritance란? 클래스가 가진 attributes(=member variables & methods)를 descendants에게 물려주자
+
+- descendants는 새로운 attributes를 가질 수도 있고 기존에 물려받은 attribute를 변형해서 가질 수 있음. 그런 경우가 아니라면 물려준 특징을 그대로 가짐
+
+- Superclass  :  
+
+  - 조상님! 상위에 계심. 새로운 것은 없음. 좀 더 general 한 클래스.
+  - *Generalized view*
+
+- Subclass : 
+
+  - 자손 클래스
+  - Specialized from the conceptual view
+
+- 그럼 여러 클래스에서 inheritance를 받을 수 있음?? (=Multiple Inheritance)
+
+  - Java : 여러 클래스에서 받을 수 었음. 하나에서만 가능
+  - C++이나 Python: 여러 클래스에서 받을 수 있음. 
+
+  ```python
+  Person
+  +NatRegionNum
+  +loin()
+  
+  
+  Customer
+  +ID
+  +A
+  ```
+
+
+
+#### (3) Inheritance in Python
 
