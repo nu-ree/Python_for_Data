@@ -141,3 +141,68 @@
 
 #### (3) Inheritance in Python
 
+- 언어마다 inheritance라는 개념이 있음. 파이썬에선 어떻게 할까? 
+
+```python
+class Father(object): 
+    # superclass에서 상속받을 다른 superclass가 없을 때 'object'를 인자로 받음
+    strHometown = 'Jeju'
+    # __init__은 따로 method로 불러오지 않아도 
+    # 이 class로 instance를 만들어 낼 때 실행된다(Constructor! 1주차에서 배움)
+    def __init__(self):
+        print('Father is created')
+    def doFatherThing(self):
+        print("Father's action")
+    def doRunning(self):
+        print("Slow")
+        
+        
+class Mother(object): 
+    strHometown = 'Seoul'
+    def __init__(self):
+        print('Father is created')
+    def doMotherThing(self):
+        print("Father's action")
+        
+class Child(Father, Mother):
+    strName = 'Moon'
+    def __init__(self):
+        super(Child, self).__init__()
+        # Child라는 class를 call할 때 나의 superclass를 call함
+        # 즉, Father의 constructor를 실행)
+        print("Child is Created")
+    def doRunning(self):
+        # superclass인 Father 에도 doRunning이 있지만, subclass의 method가 우선
+        print("Fast")
+        
+        
+ me = Child ()
+# >> Father is created
+# >> Child is created
+
+me.doFatherThing()
+# >> Father's action
+
+me.doMotherThing()
+# >> Mother's action
+
+me.doRunning()
+# >> Fast
+
+print(me.strHometown)
+# >> Jeju
+# 상속받은 두 superclass 중 먼저 상속받은 클래스(=Father)의 값이 나옴
+
+print(me.strName)
+# >> Moon
+```
+
+
+
+#### (4) *self* and *super*
+
+- *self*
+
+  > *reference variable pointing the instance itself*
+
+  - 인스턴스 자기 자신을 가리킴
