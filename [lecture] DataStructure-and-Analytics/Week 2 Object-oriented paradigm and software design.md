@@ -206,3 +206,58 @@ print(me.strName)
   > *reference variable pointing the instance itself*
 
   - 인스턴스 자기 자신을 가리킴
+
+- *super* 
+
+  > *reference variable pointing the base class instance*
+
+  ```python
+  class Child(Father, Mother):
+      strName = 'Moon'
+      def __init__(self, paramName, paramHome):
+          super(Child, self).__init__(paramHome)
+          self.strName = paramName
+              
+  ```
+
+  위 코드에서 `super(Child, self)`는 `Child`가 상속받는 두 클래스 중, 먼저 받은 `Father` 클래스를 찾가가게 되고, `.__init__`은 거기서 constructor를 찾아옴
+
+
+
+
+
+### 2-4. Polymorphism and Abstract Class
+
+#### (1) Polymorphism
+
+- Poly = Many, Morph = Shape. 다양한 모양?!???
+- 같은 모양을 가지지만, 완전히 다르게 행동할 때, '폴리모피즘'이 적용되었다고 한다. ?!
+- 시그니쳐 메소드 이름 & 파라미터 리스트
+
+**Method Overriding**
+
+- Base class에 있는 Method이름과 동일한 이름의 method가 child class에 있으면, child 클래스에 있는 것이 엎어쳐져서 콜된다
+
+**Method Overloading**
+
+- method이름은 동일하지만 파라미터가 달라서 다양한 형태로 실행 가능. 한 메소드가 다양하게 operating 됨
+
+
+
+```python 
+class Building : 
+    strAddress = 'Daejeon'
+    def openDoor(self):
+        print("Door Opened")
+        
+class Hotel:
+    def openDoor(self):
+        print("Bellboy opens 4 doors")
+    de++
+        
+```
+
+
+
+
+
