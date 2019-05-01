@@ -82,10 +82,10 @@
   - `#` : protected
   - `-`: private **현실에서 선호되는 방식**. *"내 클래스는 내가 책임질게. 다른 데이터들은 method를 이용해서 접근해 "* 안전하게 데이터를 관리하는 방식. 
 -  Member variables
-  - `+#-` `(name)`:`(type)`=`(default value)`
-  - e.g. `-ID:String` , `#AccountNum:Integer`, `+Name:String=Hey`('Hey'를 디폴트 값으로 넣어두고 나중에 method를 통해서 바꿔줄 수 있다는 의미)
+  - `+`,`#`, `-` `(name)`:`(type)`=`(default value)`
+  - e.g. `-ID:String` , `#AccountNum:Integer`, `+Name:String=Hey`(= 'Hey'를 디폴트 값으로 넣어두고 나중에 method를 통해서 바꿔줄 수 있다는 의미)
 - Member methods:
-  - `+#-` `(name)` `(arguments)`:`(type)`
+  - `+`,`#`, `-` `(name)` `(arguments)`:`(type)`
   - e.g. `+login():void`, `+requestWithdrawal(arg):Boolean`
 
 
@@ -222,6 +222,18 @@ print(me.strName)
 
   위 코드에서 `super(Child, self)`는 `Child`가 상속받는 두 클래스 중, 먼저 받은 `Father` 클래스를 찾가가게 되고, `.__init__`은 거기서 constructor를 찾아옴
 
+```python
+me = Child('Nuree', 'Suwon') # __init__의 파라미터로 'Nuree'와 'Suwon'이 들어가게 된다
+# me라는 인스턴스를 생성함과 동시에 __init__은 실행이 된다.
+# 이에 paramHome은 Child의 super class 중 첫번째 super class였던 Father의 __init__을 실행하게 되는데, 이때 파라미터로 paramHome 자리에 넣은 'Suwon'을 받아가서 strHometown에 집어넣게 된다. 
+print(me.strHometown)
+# >> "Suwon"
+print(me.strName)
+# >> "Nuree"
+```
+
+
+
 
 
 
@@ -231,16 +243,20 @@ print(me.strName)
 #### (1) Polymorphism
 
 - Poly = Many, Morph = Shape. 다양한 모양?!???
+
 - 같은 모양을 가지지만, 완전히 다르게 행동할 때, '폴리모피즘'이 적용되었다고 한다. ?!
-- 시그니쳐 메소드 이름 & 파라미터 리스트
 
-**Method Overriding**
+- 메소드 이름 & 파라미터 리스트를 **'Sinature'**(메소드가 어떤 메소드인지 알아낼 수 있고, 구분할 수 있게 해주는)가 된다!
 
-- Base class에 있는 Method이름과 동일한 이름의 method가 child class에 있으면, child 클래스에 있는 것이 엎어쳐져서 콜된다
+- **Polymorphism** 아래에는 'Method Overriding'과 'Method Overloading'이라는 하위 개념이 있음 
 
-**Method Overloading**
+  **Method Overriding**
 
-- method이름은 동일하지만 파라미터가 달라서 다양한 형태로 실행 가능. 한 메소드가 다양하게 operating 됨
+  - Base class(parent class)에 있는 Method이름과 동일한 이름의 method가 child class에 있으면, child 클래스에 있는 것이 엎어쳐져서 콜된다. 즉, method signature가 겹치는 경우 이전(parent)의 method는 무시하고 child class에서 새롭게 정의된 method를 불러온다.
+
+  **Method Overloading**
+
+  - class가 다양한 method를 가질 수 있는데, method이름은 동일하지만 파라미터가 달라서 다양한 형태로 실행 가능하다. 한 메소드가 다양하게 operating 된다는 뜻. 
 
 
 
@@ -253,11 +269,130 @@ class Building :
 class Hotel:
     def openDoor(self):
         print("Bellboy opens 4 doors")
-    de++
+    def checkIn(self):
+        print("Someone checks in for 1 day")
+    def checkIn(self, days): # << Overloading 되는 경우 
+        print("Someone checks in for ",days, "days" )
         
+lotteHotel = Hotel()
+lotteHotel.openDoor()
+lotteHotel.checkin()
+lotteHotel.checkin(2)
+
+
+class Hotel(Building):
+    def openDoor():# << Overriding 되는 경우(Base Class "Building"에 엎어치기)
+        print("OVERRIDING!!")
+    def checkIn(self, days = 1): # << default 값 이용해서 method를 overloading 해줌!!
+        print("Someone checks in for ",days, "days" )
+    
+
+```
+
+
+
+#### (2) Abstract Class
+
+> *Abstract Class란? abstract method를 가지는 class*
+
+- abstract method 란? 
+
+  - signature 파트(= 메소드 이름 & 파라미터)는 잘 정의되어 있고 실행하는 것(=implementation)은 없는 메소드. 그래서 instance를 만들 수는 없음..!!
+  - ***그럼 동작을 안할텐데? 왜 필요할까?***
+  - 여럿이 작업을 할 때, 큰 틀의 얼개를 공통적으로 짤 때 쓸 수 있음! 
+
+  - 체계적으로 class의 구조를 디자인하고 구현을 할 때 활용
+
+  > 예를 들어, '창문'이라는 클래스를 만들 때 어떤 모양의 '창문'클래스를 만들건, xxx라는 method와 yyy라는 method는 넣어서 만들어. 라는 얼개를 짜주는 것. (=*half-made!*)
+
+  - 먼저 abstract class를 만들고, 이를 base class(parent)로 받아 자식 class에 full로구현. 이 자식 클래스로 instance를 만들면 된다!
+
+```python
+import abc
+
+# 얘는 Abastract metod!
+class Room(object):
+    __metaclass__ = abc.ABCMeta
+    @abc.abstractmethod
+    def openDoor(self):
+        pass
+    @abc.abstractmethod
+    def openWindow(self):
+        pass
+
+# abstract method를 받아 실제 작동하는 class를 만든다
+class BedRoom(Room):
+    def openDoor(self):
+        print("Open bedroom door")
+    def openWindow(self):
+        print("Open bedroom window")
+room1 = Bedroom()
+print(issubclass(BedRoom, Room), isinstance(room1, Room)
+     
+# 근데 만일 아래와같이 abstract class의 method를 모두 구현하지 않으면? 
+class BedRoom(Room):
+    def openDoor(self):
+        print("Open bedroom door")
+      
+room1 = Bedroom()
+print(issubclass(BedRoom, Room), isinstance(room1, Room))
+# >> 오류가 나옴!
+```
+
+
+
+#### (3) Overriding Methods in `object`
+
+- 모든 파이썬 클래스는 `object`의 자식 클래스. 따로 써주지 않아도 기본적으로 받게 됨. 
+- 즉, `class Room: ` 라는것은 곧, `class Room(object):`와 동일함
+- 그럼 `objcect` 클래스에는 어떤 메소드들이 있을까? 
+  - `__init__` : construtor. 내가 `__init__`을 쓰면,`object`클래스에 있는 `__init__`을 override해서 구현되는 것. 
+  - `__del__ ` : 
+  - `__eq__`: `==`활용 방법 정의. 같은 class로 만들어진 instances 들이 가진  attribute들이 동일한지 equality 비교할 때 이용. 본래 `==`는  `is`랑 달라서 memory space를 비교하진 않음. 그냥 그 값 자체 비교. 즉, 이 경우에도 두 인스턴스를 가지고 `instance1 == instance2`를 실행하면, `__eq__` 메소드를 콜해서 실행. 
+  - `__cmp__ ` : `>`, `<` 활용 방법 정의 
+  - `__add__` : `+` 활용 방법 정의
+
+
+
+[*Duck Typing* : 막 프로그래밍 한 것..?!]
+
+```python
+def __eq__(self, other):
+    if isinstance(other, Room):
+        if(self.getVolume() == other.getVolume()): # 이 단계에서 other 이라는 것이 Room으로 만들어진 인스턴스인지 알 길은 없음. 그래도 일단 막 프로그래밍 함. 오류는 나중에 실행해서 발생하면 그때 고치자! 는 것이 파이썬의 정신. 
 ```
 
 
 
 
+
+### 2-5. UML Notation 2
+
+#### (1) More about UML Notations
+
+- 지금까진 class의 다이어그램을 주로 살펴봤는데, 현실엔 다양한 다이어그램이 있음
+
+  - 예: use case diagram, state diagram, deployment diagram 등등
+
+  - 우린 object-oriented programming을 하다보니 class diagram에 집중했던 것
+
+![1556704635315](C:\Users\nrchu\AppData\Roaming\Typora\typora-user-images\1556704635315.png)
+
+[복습]
+
+- visibility option --> 인캡슐레이션
+- methods 시그니쳐가 super class와 subclass에서 동일한 경우에는 method override 가능
+- methods 시그니쳐가 비슷한경우(파라미터만 다른 경우) method overloading 가능(default 값 넣어서 구현)
+
+
+
+큰 프로그램은 여러 클래스를 묶어서 구현해야 함
+
+
+
+![1556704806605](C:\Users\nrchu\AppData\Roaming\Typora\typora-user-images\1556704806605.png)
+
+- 직선 = association 관계. 그냥 뾰족한 화살표
+- generalization : 속이 빈 화살표. class를 interite 할 떄. 3개의 다른 방법으로 공통된 속성(amount)을 뱉어 냄
+- 마름모꼴 화살표 : aggregation 
 
