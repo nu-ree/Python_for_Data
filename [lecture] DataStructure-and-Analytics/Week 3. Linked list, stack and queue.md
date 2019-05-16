@@ -164,14 +164,135 @@ nodeHead = Node(binHead = True, nodeNext = node1) # 다음 노드는 있지만, 
 - array와 다른 점은 'index'를 쓰지 않고 'nextNode' 정보를 얻어서 다음 값으로 넘어감
 
 - search process:
-  - next node가 tail node?
-  - tail이면 search가 끝
-  - tail이 아니면 objValue를 찾아서 'd'가 맞는지 확인
-  - 찾으면 끝. 아니면 다시 돌아가서 이 과정을 반복
+  - 1) next node가 tail node?
+  - 2) tail이면 search가 끝
+  - 3) tail이 아니면 objValue를 찾아서 'd'가 맞는지 확인
+  - 4) 찾으면 끝. 아니면 다시 돌아가서 이 과정을 반복
 
 
 
 ### (4) Insert process in singly linked list
 
 - 이 부분에서 linked list의 POWER가 발휘!!
-- 
+
+
+
+
+
+
+
+
+
+## 3.4. Stack
+
+### (1) Scenario of Stack
+
+- 타는 순서의 반대로 내리게되는 택시를 탈 때와 비슷.  
+- 항공기에 짐을 싣는 것과도 비슷. 들어가고 나가는 위치가 한 곳으로 정해져있음. 
+
+ 
+
+### (2) Structure of Stack
+
+- singly linked list의 변형
+
+- last in first out 구조(LIFO 구조)
+
+- linked list는 중간에 데이터를 넣을 때 사용한 insert operation을 사용할 수 없음
+
+- linked list의 중간이나 끝에 있는 것은 관리를 안함. 오로지 문 앞에 있는 애들만(fist node)을 이용해서 데이터를 넣고 뺄 것. 이 첫번째 element를 **top**이라고 부름
+
+- stack의 **top 만을 이용해서 insert & remove operation을 이용**
+
+  
+
+### (3) Operation of Stack
+
+- search 안함. insert와 delete 모두 top에 대해서만 시행 
+
+- insert --> push 
+- delete --> pop
+
+```python
+from edu.kaist.seslab.ie362.week3.SinglyLinkedList import SinglyLinkedList
+class Stack(object):
+    lstInstance = SinglyLinkedList()
+    def pop(self):
+        return self.lstInstance.removeAt(0)
+    def push(self):
+        self.lstInstance.insertAt(value, 0)
+```
+
+```python
+stack = Stack()
+stack.push('a')
+stack.push('b')
+stack.push('c')
+
+print(stack.pop())
+# >> 'c'
+print(stack.pop())
+# >> 'b'
+```
+
+
+
+### (4) Example: Balancing Symbols
+
+- 중괄호, 대괄호로 수식을 만들어보자
+  - `7 + {10*[2+3]}` --> balancing이 잘 되어있음
+  - `7 + {10*[2+3}]` --> balancing이 잘 안되어있음. 대괄호가 이상한 곳에서 닫힘
+- 이를 어떻게 검사할까? 
+  - 1) empty stack을 만든다
+  - 2) 여는 symbol이면 스택 안에 **push**
+  - 3) 닫는 symbol인데, empty stack이면 오류 반환. 
+  - 4) 닫는 sumbol인데, 열렸던 symbol이 다른 모양이면 오류 반환
+  - 5) 닫는 symbol과 동일하고 empty symbol이 아니면 **pop**.
+
+
+
+## 3.5. Queue
+
+### (1) Scenario of Queue
+
+- Singly linked list의 특별한 버젼. 
+- first in first out 구조(FIFO 구조)
+- 들어가는 곳(going in)과 나가는 곳(going out)이 다름
+- 중간에 새치기 불가능
+- 제품 만드는 과정, 컨페이어 밸트와 비슷. first instance를 통해 나오고 last instance를 통해서 들어감
+
+### (2) Operation of Queue
+
+- Enqueue : 
+  - 리스트의 insert 격의 작업을 *마지막* 인스턴스에 대해 수행
+  - 링크그 리스트의 마지막에 넣어줌
+- Dequeue: 
+  - 리스트의 remove 격의 작업을 *첫 번째* 인스턴스에 대해 수행
+
+### (3) Implementation of Queue
+
+- Singly linked list의 특별한 버젼이니까, 이를 활용해서 만들어보자 
+
+```python
+from edu.kaist.seslab.ie362.week3.SinglyLinkedList import SinglyLinkedList
+class Queue(object):
+    lstInstance = SinglyLinkedList()
+    def dequeue(self):
+        return self.lstInstance.removeAt(0)
+    def enqueue(self): 
+        # list size가 변함. 즉, list size에 따라 들어갈 위치(index)가 달라짐
+        self.lstInstance.insertAt(value, self.lstInstance.getSize())
+```
+
+```python
+queue = Queue()
+queue.enqueue("a")
+queue.enqueue("b")
+queue.enqueue("c")
+
+print(queue.dequeue())
+# >> "a" 
+print(queue.dequeue())
+# >> "b"
+```
+
