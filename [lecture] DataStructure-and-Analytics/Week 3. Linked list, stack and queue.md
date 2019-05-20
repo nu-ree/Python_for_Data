@@ -174,10 +174,82 @@ nodeHead = Node(binHead = True, nodeNext = node1) # 다음 노드는 있지만, 
 ### (4) Insert process in singly linked list
 
 - 이 부분에서 linked list의 POWER가 발휘!!
+- 넣고 싶은 위치(어떤 노드 다음?)는 이미 알고 있는 것으로 간주. 즉, `node_prev`와 `node_next`는 알고 있음
+- 새로 넣을 노드 `node_new`를 instance로 만들어서 value를 넣어둔 상태
+- `node_prev`의 next node를 `node_new`로 설정 
+- `node_new`의 next node를 `node_prev`의 과거 next node로 설정
+- 즉, `A >> B >> C >> D >> E >> F` 순의 리스트에서 B와 C사이에 데이터를 넣는다고 했을 때,  A의 레퍼런스 구조와 D의 레퍼런스 구조는 바꿀 게 없음. 오로지 집어 넣는 노드의 앞뒤 내용만 바뀌게 되는 것.  
 
+### (5) Delete process in singly linked list
 
+- 이 부분에서도 linked list의 POWER가 발휘!!
+- 지울 노드의 위치, 즉`node_prev`는 이미 알고 있는 것으로 간주
+-  `node_next`를 가져와서 `node_prev`의 다음 노드로 설정
 
+```python
+class SinglyLinkedList:
+    nodeHead=''
+    nodeTail=''
+    size = 0
+    def __init__(self):
+        self.nodeTail = Node(binTail = True)
+        self.nodeHead = Node(binHead=True, nodeNext=self.nodeTail)
+        
+    def insertAt(self, objInsert, idxInsert):
+        nodeNew = Node(objValue = objInsert)
+        nodePrev = self.get(idxInsert - 1)
+        nodeNext = nodePrev.getNext()
+        nodePrev.setNext(nodeNew)
+        nodeNew.setNext(nodeNext)
+        self.size = self.size + 1
+        
+    def removeAt(self, idxRemove):
+        nodePrev = self.get(idxRemove - 1)
+        nodeRemove = nodePrev.getNext()
+        nodeNext = nodeRemove.getNext()
+        nodePrev.setNext(nodeNext)
+        self.size = self.size - 1
+        return nodeRemove.getValue()
+    
+    def get(self, idxRetrieve):
+        nodeReturn = self.nodeHead
+        for itr in range(idxRetrieve + 1):
+            nodeReturn = nodeReturn.getNext()
+        return nodeReturn
+    
+    def printStatus(self):
+        nodeCurrent = self.nodeHead
+        while nodeCurrent.getNext().isTail() == False:
+            nodeCurrent = nodeCurren.getNext()
+            print(nodeCurrent.getValue(), end=" ")
+        print("")
+        
+    def getSize(self):
+        return self.size
+```
 
+```python
+list1 = SinglyLinkedList()
+list1.insertAt('a', 0)
+list1.insertAt('b', 1)
+list1.insertAt('d', 2)
+list1.insertAt('e', 3)
+list1.insertAt('f', 4)
+list1.printStatus()
+
+list1.insertAt('c', 2)
+list1.printStatus()
+
+list1.removeAt(3)
+list1.printStatus()
+
+print("----------output---------------")
+'''
+a b d e f
+a b c d e f
+a b c e f
+'''
+```
 
 
 
