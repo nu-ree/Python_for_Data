@@ -60,8 +60,11 @@ Y[0] = X[0] # ‘=‘ 는 reference 관계. Reference를 복사해서 넣어라
 
 
 
-
 ## 3.3. Linked List
+
+- 앞이나 뒤에 값을 추가하거나 삭제하는 데 O(1)의 시간이 들어감(array는 O(n))
+- -
+
 ### (0) 복습! Assignment and Equvalence
 
 linked list를 사용하면 인덱스가 아닌 '레퍼런스 구조'로 중간에 공간을 만들어낼 수 있음
@@ -255,6 +258,14 @@ a b c e f
 
 
 
+### Doubly Linked Lists:
+
+- next pointer와 previous point 모두 있음 
+
+  
+
+![1563960179904](C:\Users\nrchu\AppData\Roaming\Typora\typora-user-images\1563960179904.png)+
+
 ## 3.4. Stack
 
 ### (1) Scenario of Stack
@@ -267,23 +278,18 @@ a b c e f
 ### (2) Structure of Stack
 
 - singly linked list의 변형
-
 - last in first out 구조(LIFO 구조)
-
 - linked list는 중간에 데이터를 넣을 때 사용한 insert operation을 사용할 수 없음
-
 - linked list의 중간이나 끝에 있는 것은 관리를 안함. 오로지 문 앞에 있는 애들만(fist node)을 이용해서 데이터를 넣고 뺄 것. 이 첫번째 element를 **top**이라고 부름
-
 - stack의 **top 만을 이용해서 insert & remove operation을 이용**
-
-  
+- 
 
 ### (3) Operation of Stack
 
 - search 안함. insert와 delete 모두 top에 대해서만 시행 
-
 - insert --> push 
 - delete --> pop
+- linked list 의 insert와 delete에 살짝의 베리에이션을 주면 됌! 유용한 linked list!
 
 ```python
 from edu.kaist.seslab.ie362.week3.SinglyLinkedList import SinglyLinkedList
@@ -322,6 +328,14 @@ print(stack.pop())
   - 5) 닫는 symbol과 동일하고 empty symbol이 아니면 **pop**.
 
 
+
+### + 언제 유용? 
+
+- 위에 나온 예시처럼 괄호의 균형이 맞는지 확인할 때. 앞에서 부터 순서대로 체크하고 넘어가야 하므로
+- Stack을 만들고, `{`를 찾으면 stack으로 넣기 --> `[` 도 stack에 넣기--> `]`인데 stack 제일 위에서 꺼낸 괄호가 `[`가 아니면 틀림 . 맞으면 제일 위에 있던 애 빼기. 스트링에 있는 다음 괄호가 닫는 괄호 --> 스택에 남아있는 `}`랑 매칭 --> 빼기. 스택  
+
+- 각각의 operation은 **O(1)**
+- 
 
 ## 3.5. Queue
 
@@ -367,4 +381,6 @@ print(queue.dequeue())
 print(queue.dequeue())
 # >> "b"
 ```
+
+
 
