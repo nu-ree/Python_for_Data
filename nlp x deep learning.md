@@ -71,3 +71,40 @@ whie True:
 
 ???
 
+
+
+
+
+38:58
+
+### 3.But why not capture co-occurence counts directly?
+
+- co-occurence matrix X를 만드는 두 가지 방법 
+  - windows vs full documents
+- Window based co-occurrence matrix
+  - w2v 처럼 각 단어마다 주변 단어들 보고 syntatic과 semantic을 수치화
+  - 왼쪽 오른쪽 구분하지 않음 = symmetric
+  - ![스크린샷 2020-03-21 오후 6.25.28](/Users/apple/Desktop/cs224n-lec2-p17.png)
+  - Problems
+    - increase in size with vocabulary
+    - very high dimension
+    - sparsity problems
+  - Solution : Low dimensional vectors
+    - 고정된, 낮은 차원의 dense vector 만들어서 주요 정보를 저장해보면 어떨까
+    - 25~1000 차원 정도로. 
+    - 차원은 어떻게 축소하지?
+      - Singular Value Decomposition(SVD)
+
+### Hacks to X (several used in Rohde et al. 2005)
+
+- Scaling the counts in the cells can help ***a lot***
+- Problem : 관사같은 단어는 너무 자주 나옴 -> syntax가 너무 많은 영향력을 가지게 됨 min(X, t), with t = 100 하거나 전부 다 무시
+
+- 가까운 단어를 더 많이 카운트할 수 있게 윈도우를 늘리거나
+- 카운트 대신에 Pearson correlations 이용해서 음수값은 0으로 바꾸기
+
+
+
+### count based vs direct prediction
+
+![스크린샷 2020-03-21 오후 6.51.25](/Users/apple/Desktop/cs224n-lec2-p26.png)
